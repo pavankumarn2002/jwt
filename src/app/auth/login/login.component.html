@@ -1,0 +1,23 @@
+<div class="container">
+    <legend>Sign Inn</legend>
+    <p>For Testing Purpose Use Below Credentials</p>
+    <p>User Name = test</p>
+    <p>Password = 1234</p>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">User Name</label>
+        <input type="text" 
+        class="form-control" 
+        id="txtUsername" 
+        aria-describedby="emailHelp"
+        [(ngModel)]="loginForm.username">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Password</label>
+        <input type="password" 
+        class="form-control" 
+        id="txtPassword" 
+        aria-describedby="emailHelp"
+        [(ngModel)]="loginForm.password">
+      </div>
+      <button class="btn btn-primary" (click)="userLogin()">Login</button>
+</div>
