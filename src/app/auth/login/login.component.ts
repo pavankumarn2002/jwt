@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { LoginModel } from '../login-model';
 @Component({
@@ -8,7 +9,7 @@ import { LoginModel } from '../login-model';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,private router:Router) { }
   loginForm: LoginModel = {
     username: "",
     password: ""
@@ -18,11 +19,9 @@ export class LoginComponent implements OnInit {
   userLogin() {
     this.authService.userLogin(this.loginForm).subscribe((data)=>{
       if(data){
-        alert('success')
-        const loc=localStorage.getItem("tokens")
-        console.log(loc)
+        this.router.navigate(["/"])
       }else{
-          alert('failed')
+          console.log('failed')
       }
     })
    }

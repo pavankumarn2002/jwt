@@ -17,6 +17,21 @@ export class AuthService {
    }
    jwtHelper = new JwtHelperService
    userProfile= new BehaviorSubject<UserProfile|null>(null);
+   getAccessToken(){
+    var localStorageToken=localStorage.getItem("tokens");
+    if(localStorageToken){
+         var token=JSON.parse(localStorageToken) as TokenModel
+         var isTokenExpried=this.jwtHelper.isTokenExpired(token.access_token)
+         if(isTokenExpried){
+            this.userProfile.next(null);
+            return "";
+         }
+         var userInfo=this.jwtHelper.decodeToken(token.access_token) as UserProfile
+         this.userProfile.next(userInfo)
+         return token.access_token;
+    }
+    return "";
+   }
    userLogin(userDetails:LoginModel){
      return this.http.post("http://localhost:3000/auth/login",userDetails)
      .pipe(
